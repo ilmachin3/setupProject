@@ -108,6 +108,9 @@ final class ProfileService {
         task.resume()
         self.task = task
     }
+    func resetProfile() {
+        profile = nil
+    }
     
     private func makeUrlRequest(endpoint: String, bearerToken: String) -> URLRequest? {
         guard let url = URL(string: endpoint) else {

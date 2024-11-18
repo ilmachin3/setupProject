@@ -154,20 +154,25 @@ final class ProfileViewController: UIViewController {
     }
     
     @objc
-    private func didTapButton() {
-        nameLabel.text = ""
-        usernameLabel.text = ""
-        descriptionLabel.text = ""
-        let tokenStorage = OAuth2TokenStorage.shared
-        tokenStorage.token = nil
-        print("[ProfileViewController]: Информация - Вы вышли из системы, токен удалён")
-        
-        // Перезагрузка экрана входа через SplashViewController, созданного программно
-        if let window = UIApplication.shared.windows.first {
-            let splashViewController = SplashViewController() // Создание SplashViewController программно
-            window.rootViewController = splashViewController
-            UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: nil, completion: nil)
-        }
-    }
-    
-}
+       private func didTapButton() {
+           
+           let alertController = UIAlertController(title: "Выход", message: "Вы уверены, что хотите выйти?", preferredStyle: .alert)
+           let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
+           alertController.addAction(cancelAction)
+           
+           let logoutAction = UIAlertAction(title: "Выход", style: .destructive) { [weak self] _ in
+               ProfileLogoutService.shared.logout()
+               self?.resetUI()
+           }
+           
+           alertController.addAction(logoutAction)
+           present(alertController, animated: true, completion: nil)
+       }
+       
+       private func resetUI() {
+           nameLabel.text = ""
+           usernameLabel.text = ""
+           descriptionLabel.text = ""
+           imageView.image = nil
+       }
+   }

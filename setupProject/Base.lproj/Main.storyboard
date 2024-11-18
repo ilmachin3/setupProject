@@ -125,10 +125,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jbW-Lg-MsQ">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jbW-Lg-MsQ">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="fi2-kG-dTm">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fi2-kG-dTm">
                                         <rect key="frame" x="0.0" y="0.0" width="271" height="352"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
@@ -139,7 +140,7 @@
                                     <outlet property="delegate" destination="KbV-ar-Pib" id="YXx-YI-ec4"/>
                                 </connections>
                             </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8M5-im-bNa">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8M5-im-bNa">
                                 <rect key="frame" x="9" y="9" width="48" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="MbN-nX-OtK"/>
@@ -151,7 +152,7 @@
                                     <action selector="didTapBackButton:" destination="KbV-ar-Pib" eventType="touchUpInside" id="zKt-Kz-1vy"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kTc-M5-5Li">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kTc-M5-5Li">
                                 <rect key="frame" x="171.66666666666666" y="785" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="7Fl-oX-jI6"/>
@@ -166,21 +167,13 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="XgY-AS-moL"/>
                         <color key="backgroundColor" red="0.1019607843" green="0.1058823529" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="jbW-Lg-MsQ" firstAttribute="top" secondItem="YgW-VW-AUe" secondAttribute="top" id="1tS-GW-6RE"/>
-                            <constraint firstItem="jbW-Lg-MsQ" firstAttribute="leading" secondItem="XgY-AS-moL" secondAttribute="leading" id="5Lr-zz-UdU"/>
-                            <constraint firstAttribute="bottom" secondItem="jbW-Lg-MsQ" secondAttribute="bottom" id="DXN-uC-brb"/>
-                            <constraint firstItem="XgY-AS-moL" firstAttribute="trailing" secondItem="jbW-Lg-MsQ" secondAttribute="trailing" id="MVL-qn-LYI"/>
-                            <constraint firstItem="kTc-M5-5Li" firstAttribute="centerX" secondItem="XgY-AS-moL" secondAttribute="centerX" id="ZnX-Eg-Nv9"/>
-                            <constraint firstItem="XgY-AS-moL" firstAttribute="bottom" secondItem="kTc-M5-5Li" secondAttribute="bottom" constant="17" id="fGE-Py-7va"/>
-                            <constraint firstItem="8M5-im-bNa" firstAttribute="top" secondItem="XgY-AS-moL" secondAttribute="top" constant="9" id="fVQ-eD-lnc"/>
-                            <constraint firstItem="8M5-im-bNa" firstAttribute="leading" secondItem="XgY-AS-moL" secondAttribute="leading" constant="9" id="t4I-sj-wzj"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Sy2-8D-aIo"/>
                     <connections>
+                        <outlet property="backButton" destination="8M5-im-bNa" id="wf7-9N-rve"/>
                         <outlet property="imageView" destination="fi2-kG-dTm" id="Syj-qv-Ln2"/>
                         <outlet property="scrollView" destination="jbW-Lg-MsQ" id="lQG-cU-ea6"/>
+                        <outlet property="shareButton" destination="kTc-M5-5Li" id="HX3-3G-Og6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uZS-VQ-557" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -343,7 +336,6 @@
     </scenes>
     <resources>
         <image name="0" width="1600" height="1059"/>
-        <image name="1" width="985" height="1280"/>
         <image name="Active" width="75" height="49"/>
         <image name="Backward" width="24" height="24"/>
         <image name="Logo_of_Unsplash" width="60" height="60"/>
