@@ -156,6 +156,7 @@ final class SingleImageViewController: UIViewController {
     
     @IBAction private func didTapBackButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
+        
     }
     
     @IBAction private func didTapShareButton(_ sender: Any) {
