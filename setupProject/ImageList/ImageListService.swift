@@ -23,7 +23,7 @@ struct User {
 struct Photo {
     let id: String
     let size: CGSize
-    let createdAt: Date?
+    let createdAt: String?
     let welcomeDescription: String?
     let thumbImageURL: String
     let regularImageURL: String
@@ -43,11 +43,11 @@ struct PhotoResult: Codable {
     let urls: UrlsResult
     let user: UserResult
     
-    var createdAtDate: Date? {
-        let dateFormatter = ISO8601DateFormatter()
-        dateFormatter.formatOptions = [.withInternetDateTime]
-        return dateFormatter.date(from: created_at)
-    }
+//    var createdAtDate: Date? {
+//        let dateFormatter = ISO8601DateFormatter()
+//        dateFormatter.formatOptions = [.withInternetDateTime]
+//        return dateFormatter.date(from: created_at)
+//    }
 }
 
 struct UserResult: Codable {
@@ -130,7 +130,7 @@ final class ImagesListService {
                     return Photo(
                         id: photoResult.id,
                         size: CGSize(width: photoResult.width, height: photoResult.height),
-                        createdAt: photoResult.createdAtDate,
+                        createdAt: photoResult.created_at,
                         welcomeDescription: photoResult.description,
                         thumbImageURL: photoResult.urls.thumb,
                         regularImageURL: photoResult.urls.regular,
