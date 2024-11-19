@@ -68,7 +68,7 @@ final class ImagesListCell: UITableViewCell {
         if let photoDate = photo.createdAt, let date = iDateFormatter.date(from: photoDate) {
             dateLabel.text = dateFormatter.string(from: date)
         } else {
-            dateLabel.text = ""
+            dateLabel.text = "ate not available"
         }
         
         let likeImage = photo.isLiked ? UIImage(named: "like_button_on"): UIImage(named: "like_button_off")
