@@ -29,13 +29,12 @@ final class ImagesListViewController: UIViewController {
         imagesListService.fetchPhotosNextPage()
     }
     
-    private lazy var dateFormatter:DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .long
-        formatter.timeStyle = .none
-        return formatter
-    } ()
-    
+//    private lazy var dateFormatter:DateFormatter = {
+//        let formatter = DateFormatter()
+//        formatter.dateStyle = .long
+//        formatter.timeStyle = .none
+//        return formatter
+//    } ()
     
     private func observeImagesListControllerChanges() {
         imagesListControllerObserver = NotificationCenter.default.addObserver(
@@ -98,11 +97,11 @@ extension ImagesListViewController: UITableViewDataSource {
     }
 }
 
-extension ImagesListViewController {
-    func configCell(_ cell: ImagesListCell, with photo: Photo) {
-        cell.dateLabel.text = dateFormatter.string(from: Date())
-    }
-}
+//extension ImagesListViewController {
+//    func configCell(_ cell: ImagesListCell, with photo: Photo) {
+//        cell.dateLabel.text = dateFormatter.string(from: Date())
+//    }
+//}
 
 
 extension ImagesListViewController: UITableViewDelegate {
