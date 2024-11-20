@@ -5,7 +5,7 @@
 //  Created by Илья Дышлюк on 21.11.2024.
 //
 
-@testable import ImageFeed
+@testable import setupProject
 import XCTest
 
 class ImagesListPresenterTests: XCTestCase {

@@ -61,10 +61,6 @@ final class ImagesListCell: UITableViewCell {
             ]
         )
         
-//        if let createdAt = photo.createdAt {
-//            dateLabel.text = dateFormatter.string(from: createdAt)
-//        } else {
-//            dateLabel.text = "Date not available"
         if let photoDate = photo.createdAt, let date = iDateFormatter.date(from: photoDate) {
             dateLabel.text = dateFormatter.string(from: date)
         } else {

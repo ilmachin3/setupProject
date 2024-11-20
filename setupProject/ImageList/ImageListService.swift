@@ -7,6 +7,13 @@
 
 import Foundation
 
+protocol ImagesListServiceProtocol {
+    var photos: [Photo] { get }
+    
+    func fetchPhotosNextPage()
+    func changeLike(photoId: String, isLiked: Bool, _ completion: @escaping (Result<Void, Error>) -> Void)
+}
+
 enum ImagesListServiceError: Error {
     case urlError
     case failedToFetchPhotos

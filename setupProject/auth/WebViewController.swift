@@ -7,8 +7,22 @@
 import UIKit
 import WebKit
 
-final class WebViewController: UIViewController {
+protocol WebViewViewControllerDelegate: AnyObject {
+    func webViewViewController(_ vc: WebViewController, didAuthenticateWithCode code: String)
+    func webViewViewControllerDidCancel(_ vc: WebViewController)
+}
+
+public protocol WebViewViewControllerProtocol: AnyObject {
+    var presenter: WebViewPresenterProtocol? { get set }
+    func load(request: URLRequest)
+    func setProgressValue(_ newValue: Float)
+    func setProgressHidden(_ isHidden: Bool)
+}
+
+final class WebViewController: UIViewController & WebViewViewControllerProtocol{
     
+    var presenter: (any WebViewPresenterProtocol)?
+
     weak var delegate: WebViewControllerDelegate?
     
     private var estimatedProgressObservation: NSKeyValueObservation?
@@ -53,6 +67,18 @@ final class WebViewController: UIViewController {
     }
     
     @IBOutlet weak var progressViewAction: UIProgressView!
+    
+    func load(request: URLRequest) {
+        webView.load(request)
+    }
+    
+    func setProgressValue(_ newValue: Float) {
+        progressView.progress = newValue
+    }
+    
+    func setProgressHidden(_ isHidden: Bool) {
+        progressView.isHidden = isHidden
+    }
     
     func configureBackButton(){
         navigationController?.navigationBar.backIndicatorImage = UIImage(named: "Backward") // 1
