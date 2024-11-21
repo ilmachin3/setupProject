@@ -52,6 +52,7 @@ final class ImageFeedUITests: XCTestCase {
         let tablesQuery = app.tables
         
         let cell = tablesQuery.children(matching: .cell).element(boundBy: 0)
+        sleep(5)
         cell.swipeUp()
         
         sleep(2)
