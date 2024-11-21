@@ -46,6 +46,7 @@ final class ImagesListCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         heartButton.addTarget(self, action: #selector(likeButtonPressed), for: .touchUpInside)
+        heartButton.accessibilityIdentifier = "like button tapped"
     }
     
     func configure(with photo: Photo) {

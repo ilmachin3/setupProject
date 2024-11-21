@@ -74,7 +74,7 @@ struct UrlsResult: Codable {
     let full: String
 }
 
-final class ImagesListService {
+final class ImagesListService: ImagesListServiceProtocol{
     
     static let shared = ImagesListService()
     static let didChangeNotification = Notification.Name(rawValue: "ImagesListServiceDidChange")

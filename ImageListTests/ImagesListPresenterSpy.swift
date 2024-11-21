@@ -6,3 +6,22 @@
 //
 
 import Foundation
+@testable import setupProject
+
+class ImagesListPresenterSpy: ImagesListPresenterProtocol {
+    var view: ImagesListViewControllerProtocol?
+    var photos: [Photo] = []
+    var didLoadCalled = false
+
+    func setView(_ view: ImagesListViewControllerProtocol) {
+        self.view = view
+    }
+
+    func viewDidLoad() {
+        didLoadCalled = true
+    }
+
+    func didSelectPhoto(at indexPath: IndexPath) {}
+
+    func toggleLike(for indexPath: IndexPath) {}
+}

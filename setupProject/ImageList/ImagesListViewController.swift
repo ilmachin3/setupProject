@@ -35,11 +35,14 @@ final class ImagesListViewController: UIViewController , ImagesListViewControlle
         tableView.delegate = self
         tableView.dataSource = self
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
-        observeImagesListControllerChanges()
-        imagesListService.fetchPhotosNextPage()
-        presenter.viewDidLoad()
-        presenter = ImagesListPresenter(imagesListService: imagesListService as! ImagesListServiceProtocol)
+        presenter = ImagesListPresenter(imagesListService: imagesListService)
         presenter.setView(self)
+        setupTableView()
+        observeImagesListControllerChanges()
+        //imagesListService.fetchPhotosNextPage()
+        presenter.viewDidLoad()
+        
+        
     }
     
     private func observeImagesListControllerChanges() {

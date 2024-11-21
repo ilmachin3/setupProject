@@ -6,3 +6,8 @@
 //
 
 import Foundation
+@testable import setupProject
+
+class MockProfileImageService: ProfileImageServiceProtocol {
+    var avatarURL: String? = "https://example.com/avatar.jpg"
+}

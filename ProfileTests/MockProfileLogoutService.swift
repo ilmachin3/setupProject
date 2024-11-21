@@ -6,3 +6,11 @@
 //
 
 import Foundation
+@testable import setupProject
+
+class MockProfileLogoutService: ProfileLogoutServiceProtocol {
+    func logout() {
+        
+    }
+    
+}

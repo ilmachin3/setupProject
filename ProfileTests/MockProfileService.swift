@@ -6,3 +6,8 @@
 //
 
 import Foundation
+@testable import setupProject
+
+class MockProfileService: ProfileServiceProtocol {
+    var profile: ProfileService.Profile?
+}
