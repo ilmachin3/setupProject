@@ -7,13 +7,17 @@
 import UIKit
 import Foundation
 
+protocol ProfileImageServiceProtocol {
+    var avatarURL: String? {get}
+}
+
 enum ProfileImageServiceError: Error {
     case missingToken
     case invalidURL
     case urlSessionError
 }
 
-final class ProfileImageService {
+final class ProfileImageService: ProfileImageServiceProtocol {
     
     static let shared = ProfileImageService()
     static let didChangeNotification = Notification.Name(rawValue: "ProfileImageProviderDidChange")
