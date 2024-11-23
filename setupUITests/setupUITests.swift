@@ -23,21 +23,21 @@ final class ImageFeedUITests: XCTestCase {
         app.buttons["Войти"].tap()
         
         let webView = app.webViews["UnsplashWebView"]
-        
+        sleep(10)
         let loginTextField = webView.descendants(matching: .textField).element
         XCTAssertTrue(loginTextField.waitForExistence(timeout: 5))
-        
+        sleep(10)
         loginTextField.tap()
         loginTextField.typeText("")
         webView.swipeUp()
         
         let passwordTexField = webView.descendants(matching: .secureTextField).element
         XCTAssertTrue(passwordTexField.waitForExistence(timeout: 5))
-        
+        sleep(10)
         passwordTexField.tap()
         passwordTexField.typeText("")
         webView.swipeUp()
-        
+        sleep(10)
         webView.buttons["Login"].tap()
         
         let tablesQuery = app.tables
