@@ -103,7 +103,7 @@ final class ProfileViewController: UIViewController, ProfileViewProtocol {
         guard let profileImageURL = ProfileImageService.shared.avatarURL,
               let url = URL(string: profileImageURL)
         else { return }
-
+        
         imageView.kf.indicatorType = .activity
         imageView.kf.setImage(
             with: url,
@@ -187,4 +187,4 @@ final class ProfileViewController: UIViewController, ProfileViewProtocol {
         descriptionLabel.text = ""
         imageView.image = nil
     }
-   }
+}
