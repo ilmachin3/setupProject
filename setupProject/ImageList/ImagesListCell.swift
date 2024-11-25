@@ -46,7 +46,6 @@ final class ImagesListCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         heartButton.addTarget(self, action: #selector(likeButtonPressed), for: .touchUpInside)
-        heartButton.accessibilityIdentifier = "like button tapped"
     }
     
     func configure(with photo: Photo) {
@@ -62,10 +61,14 @@ final class ImagesListCell: UITableViewCell {
             ]
         )
         
+//        if let createdAt = photo.createdAt {
+//            dateLabel.text = dateFormatter.string(from: createdAt)
+//        } else {
+//            dateLabel.text = "Date not available"
         if let photoDate = photo.createdAt, let date = iDateFormatter.date(from: photoDate) {
             dateLabel.text = dateFormatter.string(from: date)
         } else {
-            dateLabel.text = "ate not available"
+            dateLabel.text = ""
         }
         
         let likeImage = photo.isLiked ? UIImage(named: "like_button_on"): UIImage(named: "like_button_off")

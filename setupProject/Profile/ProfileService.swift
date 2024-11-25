@@ -13,11 +13,7 @@ enum ProfileServiceError: Error {
     case urlSessionError
 }
 
-protocol ProfileServiceProtocol {
-    var profile: ProfileService.Profile? {get}
-}
-
-final class ProfileService: ProfileServiceProtocol {
+final class ProfileService {
     
     private(set) var profile: Profile?
     static let shared = ProfileService()

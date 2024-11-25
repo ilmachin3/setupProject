@@ -8,15 +8,8 @@ import UIKit
 
 import Kingfisher
 
-protocol ProfileViewProtocol: AnyObject {
-    func updateProfileDetails(_ profile: ProfileService.Profile)
-    func updateAvatar(with imageURL: String)
-    func resetUI()
-}
-
-final class ProfileViewController: UIViewController, ProfileViewProtocol {
+final class ProfileViewController: UIViewController {
     
-    var presenter: ProfilePresenterProtocol!
     let profileService = ProfileService.shared
     private var profileImageServiceObserver: NSObjectProtocol?
     
@@ -31,14 +24,15 @@ final class ProfileViewController: UIViewController, ProfileViewProtocol {
         
         view.backgroundColor = .ypBlack
         
-        presenter = ProfilePresenter(view: self, profileService: profileService, profileImageService: ProfileImageService.shared, profileLogoutService: ProfileLogoutService.shared)
-        
         setupUI()
-        addLogoutButton()
         updateAvatar()
+        addLogoutButton()
+        
         if let profile = profileService.profile {
             updateProfileDetails(profile)
         }
+        
+        observeProfileImageChanges()
     }
     
     private func setupUI() {
@@ -90,38 +84,12 @@ final class ProfileViewController: UIViewController, ProfileViewProtocol {
             target: self,
             action: #selector(self.didTapButton))
         
-        logoutButton.accessibilityIdentifier = "logoutbutton"
         logoutButton.tintColor = .ypRed
         logoutButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(logoutButton)
         
         logoutButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
         logoutButton.centerYAnchor.constraint(equalTo: imageView.centerYAnchor).isActive = true
-    }
-    
-    func updateAvatar(with imageURL: String) {
-        guard let profileImageURL = ProfileImageService.shared.avatarURL,
-              let url = URL(string: profileImageURL)
-        else { return }
-
-        imageView.kf.indicatorType = .activity
-        imageView.kf.setImage(
-            with: url,
-            placeholder: nil,
-            options: [
-                .transition(.fade(0.5))
-            ],
-            completionHandler: { result in
-                switch result {
-                case .success(_):
-                    self.imageView.layer.cornerRadius = 35
-                    self.imageView.layer.masksToBounds = true
-                    break
-                case .failure(let error):
-                    print("Failed to load Image: \(error)")
-                }
-            }
-        )
     }
     
     private func observeProfileImageChanges() {
@@ -134,9 +102,10 @@ final class ProfileViewController: UIViewController, ProfileViewProtocol {
                 guard let self = self else { return }
                 self.updateAvatar()
             }
+        //        updateAvatar()
     }
     
-    func updateProfileDetails(_ profile: ProfileService.Profile) {
+    private func updateProfileDetails(_ profile: ProfileService.Profile) {
         nameLabel.text = profile.name
         usernameLabel.text = profile.loginName
         descriptionLabel.text = profile.bio ?? ""
@@ -177,14 +146,25 @@ final class ProfileViewController: UIViewController, ProfileViewProtocol {
     }
     
     @objc
-    private func didTapButton() {
-        presenter.showLogoutAlert(in: self)
-    }
-    
-    func resetUI() {
-        nameLabel.text = ""
-        usernameLabel.text = ""
-        descriptionLabel.text = ""
-        imageView.image = nil
-    }
+       private func didTapButton() {
+           
+           let alertController = UIAlertController(title: "Выход", message: "Вы уверены, что хотите выйти?", preferredStyle: .alert)
+           let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
+           alertController.addAction(cancelAction)
+           
+           let logoutAction = UIAlertAction(title: "Выход", style: .destructive) { [weak self] _ in
+               ProfileLogoutService.shared.logout()
+               self?.resetUI()
+           }
+           
+           alertController.addAction(logoutAction)
+           present(alertController, animated: true, completion: nil)
+       }
+       
+       private func resetUI() {
+           nameLabel.text = ""
+           usernameLabel.text = ""
+           descriptionLabel.text = ""
+           imageView.image = nil
+       }
    }

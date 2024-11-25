@@ -7,13 +7,6 @@
 
 import Foundation
 
-protocol ImagesListServiceProtocol {
-    var photos: [Photo] { get }
-    
-    func fetchPhotosNextPage()
-    func changeLike(photoId: String, isLiked: Bool, _ completion: @escaping (Result<Void, Error>) -> Void)
-}
-
 enum ImagesListServiceError: Error {
     case urlError
     case failedToFetchPhotos
@@ -74,7 +67,7 @@ struct UrlsResult: Codable {
     let full: String
 }
 
-final class ImagesListService: ImagesListServiceProtocol{
+final class ImagesListService {
     
     static let shared = ImagesListService()
     static let didChangeNotification = Notification.Name(rawValue: "ImagesListServiceDidChange")
